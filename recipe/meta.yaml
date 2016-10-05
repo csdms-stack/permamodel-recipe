@@ -1,0 +1,36 @@
+{% set name = "permamodel" %}
+{% set version = "0.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/permamodel/permamodel
+
+requirements:
+  build:
+    - python
+    - numpy
+    - nose
+  run:
+    - python
+    - numpy
+    - nose
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
+
+test:
+  imports:
+    - permamodel
+    - permamodel.components
+  commands:
+    - nosetests --with-doctest permamodel
+
+about:
+  home: https://github.com/permamodel/permamodel
+  license: MIT
+  summary: a collection of numerical permafrost models
+  dev_url: https://github.com/permamodel/permamodel
