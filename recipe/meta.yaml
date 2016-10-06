@@ -29,7 +29,8 @@ test:
     - permamodel
     - permamodel.components
   commands:
-    - bmi-tester permamodel.components.bmi_frost_number.BmiFrostnumberMethod
+    - curl https://raw.githubusercontent.com/permamodel/permamodel/master/permamodel/examples/Frostnumber_example_singlesite_singleyear.cfg -o example.cfg
+    - bmi-tester permamodel.components.bmi_frost_number.BmiFrostnumberMethod --input=example.cfg
     # - nosetests --with-doctest permamodel
 
 about:
