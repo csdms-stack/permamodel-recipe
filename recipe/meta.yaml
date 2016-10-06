@@ -23,11 +23,14 @@ build:
   script: python setup.py install --single-version-externally-managed --record record.txt
 
 test:
+  requires:
+    - bmi-tester
   imports:
     - permamodel
     - permamodel.components
   commands:
-    - nosetests --with-doctest permamodel
+    - permamodel.components.bmi_frost_number.BmiFrostnumberMethod
+    # - nosetests --with-doctest permamodel
 
 about:
   home: https://github.com/permamodel/permamodel
