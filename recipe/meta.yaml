@@ -29,7 +29,7 @@ test:
     - permamodel
     - permamodel.components
   commands:
-    - permamodel.components.bmi_frost_number.BmiFrostnumberMethod
+    - bmi-tester permamodel.components.bmi_frost_number.BmiFrostnumberMethod
     # - nosetests --with-doctest permamodel
 
 about:
