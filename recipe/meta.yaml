@@ -13,10 +13,20 @@ requirements:
     - python
     - numpy
     - nose
+    - scipy
+    - netcdf4
+    - affine
+    - python-dateutil
+    - pyyaml
   run:
     - python
     - numpy
     - nose
+    - scipy
+    - netcdf4
+    - affine
+    - python-dateutil
+    - pyyaml
 
 build:
   number: 0
