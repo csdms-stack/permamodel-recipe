@@ -11,17 +11,10 @@ source:
 requirements:
   build:
     - python
-    - numpy
-    - nose
-    - scipy
-    - netcdf4
-    - affine
-    - python-dateutil
-    - pyyaml
+    - setuptools
   run:
     - python
     - numpy
-    - nose
     - scipy
     - netcdf4
     - affine
@@ -34,6 +27,7 @@ build:
 
 test:
   requires:
+    - nose
     - bmi-tester
   imports:
     - permamodel
@@ -41,7 +35,7 @@ test:
   commands:
     - curl https://raw.githubusercontent.com/permamodel/permamodel/master/permamodel/examples/Frostnumber_example_singlesite_singleyear.cfg -o example.cfg
     - bmi-tester permamodel.components.bmi_frost_number.BmiFrostnumberMethod --infile=example.cfg
-    # - nosetests --with-doctest permamodel
+    # - nosetests --with-doctest permamodel  ## Borked. See line 134 of frost_number.py
 
 about:
   home: https://github.com/permamodel/permamodel
