@@ -1,5 +1,5 @@
 {% set name = "permamodel" %}
-{% set version = "0.1.1" %}
+{% set version = "0.1.2" %}
 
 package:
   name: {{ name }}
@@ -8,6 +8,10 @@ package:
 source:
   git_url: https://github.com/permamodel/permamodel
   git_rev: v{{ version }}
+
+build:
+  # number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
   build:
@@ -19,10 +23,6 @@ requirements:
     - affine
     - python-dateutil
     - pyyaml
-
-build:
-  number: 1
-  script: python setup.py install --single-version-externally-managed --record record.txt
 
 test:
   requires:
@@ -39,5 +39,5 @@ test:
 about:
   home: https://github.com/permamodel/permamodel
   license: MIT
-  summary: a collection of numerical permafrost models
+  summary: A collection of numerical permafrost models.
   dev_url: https://github.com/permamodel/permamodel
