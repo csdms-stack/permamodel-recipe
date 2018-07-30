@@ -3,12 +3,17 @@ os:
 - linux
 - osx
 env:
+  matrix:
+  - TRAVIS_PYTHON_VERSION="2.7"
+  - TRAVIS_PYTHON_VERSION="3.5"
+  - TRAVIS_PYTHON_VERSION="3.6"
+  - TRAVIS_PYTHON_VERSION="3.7"
   global:
   - CONDA_PREFIX=$HOME/miniconda
-  - MINICONDA_URL_BASE="https://repo.continuum.io/miniconda/Miniconda2-latest"
-  - TRAVIS_PYTHON_VERSION="2.7"
+  - MINICONDA_URL_BASE="https://repo.continuum.io/miniconda/Miniconda3-latest"
   - secure: "oR1QFQTslnpfRlV5HGOFw5HKH74h/icflhWJBtFd4i6SGazmQ0MWVTR9hKbqCGzIYWfjjKmtC6h/GaP7ddQsa9YxToNb0dC9Xcjt7RfenX8og9og+pB85PwG+nvwdiN0DQo8/x4tzZA/X4dwpCYbAWBENP/xQFvRKH8Vt71kfPC2DvI92/zuIdG6q5DMNE6V23mtbcw8tSiDrLNcu16yEGi6f8iwVGHcQNJRuvAQylU3qireit8eNV6fcm9Ev/vFKK3LdC2h0tns14MDbv9pIfcIjb9cABR2x7Gkuqr2fZ6xtQMYbUPjsJmiWlHJJcTswuS4wDkpVPucr7sJwxSzNizNRN6H8MLCB1SkBd7PbDGUn+8HDlamdP8/M6JTmVDh+zRkkRGOC+NV/lfTxLlr9sWKs6sGc0fCBTzH8GRsqAXZpmSSkn40jD1stCX0wmW8c8jXDkkzj2AMPu1SfIj41piEGcB11zs0xcZjJHon6RFyO8sQ5I5FFmudzMXuaLmzIaXUumiG/M04/P6Rt27jzI9Vesp61Xjtdmq7D4EjlE9AcWDNLJ+iKrk4DS2GHhMZV61B9lZqqu6YDfLkhyUqCjPIv9b/KO0CoBkh1REDDv92debQup9hZpjHmHekqV9NJF7T8nB27z8knpMVy1UQGCbeBdthVJl4SzMCjAYSvK4="
 sudo: false
+filter_secrets: false
 before_install:
 - |
   if [[ $TRAVIS_OS_NAME == "osx" ]]; then
@@ -28,13 +33,13 @@ install:
 - export PATH="$CONDA_PREFIX/bin:$PATH"
 - hash -r
 - conda config --set always_yes yes --set changeps1 no
-- conda install python=$TRAVIS_PYTHON_VERSION
+- conda create -n _testing python=$TRAVIS_PYTHON_VERSION
+- source activate _testing
 - conda install -q conda-build anaconda-client coverage sphinx
 script:
-- conda build ./recipe -c csdms-stack -c defaults -c conda-forge --old-build-string
+- conda build ./recipe -c csdms-stack -c conda-forge
 after_success:
-- |
-  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-    curl https://raw.githubusercontent.com/csdms/ci-tools/master/anaconda_upload.py > $HOME/anaconda_upload.py
-    echo $ANACONDA_TOKEN | python $HOME/anaconda_upload.py ./recipe --channel=main --org=csdms-stack --old-build-string --token=-
-  fi
+- curl https://raw.githubusercontent.com/csdms/ci-tools/master/anaconda_upload.py
+  > $HOME/anaconda_upload.py
+- echo $ANACONDA_TOKEN | python $HOME/anaconda_upload.py ./recipe --channel=main --org=csdms-stack
+  --token=-
