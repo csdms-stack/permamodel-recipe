@@ -11,8 +11,7 @@ source:
   sha256: bc42ddc8c05b87d9b5b32daf044c53c2074d9e19206be6d3695ede8669f2f9c6
 
 build:
-  # number: 0
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
   build:
