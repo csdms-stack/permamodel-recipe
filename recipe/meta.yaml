@@ -15,8 +15,11 @@ build:
 
 requirements:
   build:
+    - setuptools
     - python
+    - pip
   run:
+    - python
     - numpy
     - scipy
     - netcdf4
@@ -27,14 +30,13 @@ requirements:
 test:
   requires:
     - nose
-    - bmi-tester
   imports:
     - permamodel
     - permamodel.components
-  commands:
-    - curl https://raw.githubusercontent.com/permamodel/permamodel/master/permamodel/examples/Frostnumber_example_singlesite_singleyear.cfg -o example.cfg
-    - bmi-tester permamodel.components.bmi_frost_number.BmiFrostnumberMethod --infile=example.cfg
-    # - nosetests --with-doctest permamodel  ## Borked. See line 134 of frost_number.py
+  # commands:
+  #   - nosetests --with-doctest permamodel
+  #   - curl https://raw.githubusercontent.com/permamodel/permamodel/master/permamodel/examples/Frostnumber_example_singlesite_singleyear.cfg -o example.cfg
+  #   - bmi-tester permamodel.components.bmi_frost_number.BmiFrostnumberMethod --infile=example.cfg
 
 about:
   home: https://github.com/permamodel/permamodel
