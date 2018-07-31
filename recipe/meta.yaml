@@ -8,7 +8,7 @@ package:
 source:
   url: https://github.com/mcflugen/{{ name }}/archive/v{{ version }}.tar.gz
   fn: {{ name }}-{{ version }}.tar.gz
-  sha256: bc42ddc8c05b87d9b5b32daf044c53c2074d9e19206be6d3695ede8669f2f9c6
+  sha256: dd77d224e05973c5dbb1468692c3c7efeee2ed14d9a47c94a38f5e4e374ef29b
 
 build:
   script: python -m pip install --no-deps --ignore-installed .
